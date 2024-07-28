@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goCode</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/image/pexel6.jpg');
+            background-size: cover;
+            background-position: right;
+            background-repeat: no-repeat;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            position: relative;
+            width: 100%;
+        }
+
+        .logo {
+            flex: 1;
+        }
+
+        .search-bar {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-bar input[type="search"] {
+            width: 70%;
+            height: 30px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .search-bar button[type="button"] {
+            background-color: rgb(229, 235, 232);
+            color: rgb(16, 85, 235);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 10px;
+        }
+
+        .search-bar button[type="button"]:hover {
+            background-color: #d5e1db;
+        }
+
+        .contact-info {
+            flex: 1;
+            text-align: right;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #1dd849;
+            width: 100%;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #150fbe;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav ul li a i {
+            margin-right: 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #780bf5;
+            color: rgb(0, 3, 6);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content-section {
+            display: none;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            color: rgb(13, 13, 235);
+            background-color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 9px;
+            padding: 2px;
+        }
+
+        .form-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            background: rgb(27, 179, 225);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(40, 2, 205, 0.1);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        label {
+            margin-left: 10px;
+        }
+
+        input[type="text"], input[type="password"] {
+            margin-right: 10px;
+            width: calc(100% - 20px);
+            height: 20px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        #your-color {
+            color: black;
+            font-size: 20px;
+        }
+
+        .special {
+            text-align: center;
+        }
+
+        button {
+            border: none;
+            background-color: rgb(9, 69, 36);
+            color: rgb(16, 85, 235);
+            width: 100%;
+            height: 25px;
+            margin-top: 10px;
+        }
+
+        #middle {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .icons {
+            text-align: center;
+            border: 2px solid rgb(220, 220, 220);
+            line-height: 21px;
+            margin: 20px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        i {
+            margin: 10px;
+        }
+
+        .error-message {
+            color: black;
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>&lt;goCode&gt;</h1>
+        </div>
+        <div class="search-bar">
+            <input type="search" placeholder="Search..." id="search-input">
+            <button type="button" id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="contact-info">
+            <p>Contact: kipngenogregory@gmail.com</p>
+            <p>to get SILVER quality services</p>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="toggleContent('home')"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#" onclick="toggleContent('notifications')"><i class="fas fa-bell"></i> Notifications</a></li>
+            <li><a href="#" onclick="toggleContent('services')"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li><a href="#" onclick="toggleContent('settings')"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" onclick="toggleContent('help')"><i class="fas fa-question-circle"></i> Help</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="home" class="content-section active">
+            <h2>Home</h2>
+            <p>Welcome to goCode.</p>
+        </div>
+        <div id="notifications" class="content-section">
+            <h2>Notifications</h2>
+            <p>Here are your notifications.</p>
+        </div>
+        <div id="services" class="content-section">
+            <h2>Services</h2>
+            <ul>
+                <li>Front-end development</li>
+                <li>Back-end development</li>
+                <li>Coding assignments for students</li>
+                <li>Web development</li>
+                <li>UI/UX design</li>
+                <li>Mobile Android development</li>
+                <li>Graphic design</li>
+            </ul>
+        </div>
+        <div id="settings" class="content-section">
+            <h2>Settings</h2>
+            <p>Adjust your preferences here.</p>
+        </div>
+        <div id="help" class="content-section">
+            <h2>Help</h2>
+            <p>How can we assist you?</p>
+        </div>
+        <div class="form-container">
+            <form id="login-form" action="send/php/" method="post" title="LOGIN-page">
+                <div class="main-word">
+                    <span>LOGIN </span>
+                    <p>DONT HAVE AN ACCOUNT? <span id="your-color"><b>CREATE ACCOUNT AND SIGN UP</b></span></p>
+                </div>
+                <table>
+                    <tr>
+                        <td><label for="email">Email</label></td>
+                        <td><input type="text" id="email" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Password</label></td>
+                        <td>
+                            <input type="password" id="password" name="password" required>
+                        </td>
+                    </tr>
+                </table>
+                <div class="special">
+                    <button type="submit" value="Login" title="login-page">Login</button>
+                    <div id="middle">--------------- OR ---------------</div>
+                </div>
+                <div class="icons">
+                    <p><a href="/auth/google"><i class="fab fa-google fa-lg" style="color: blueviolet;"></i> Continue with Google</a></p>
+                    <p><a href="/auth/facebook"><i class="fab fa-facebook fa-lg" style="color: blue;"></i> Sign in with Facebook</a></p>
+                    <p><a href="/auth/linkedin"><i class="fab fa-linkedin fa-lg" style="color: chartreuse;"></i> Sign in with LinkedIn</a></p>
+                </div>
+                <p id="error-message" class="error-message">Password must contain at least 8 characters.</p>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 All RIGHTS RESERVED.</p>
+    </footer>
+    <script>
+        function toggleContent(sectionId) {
+            var sections = document.querySelectorAll('.content-section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            var section = document.getElementById(sectionId);
+            section.classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initially hide all content sections except the first one
+            var sections = document.querySelectorAll('.content-section');
+            sections.forEach(function (section, index) {
+                if (index === 0) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+
+            // Password validation
+            var loginForm = document.getElementById('login-form');
+            var passwordField = document.getElementById('password');
+            var errorMessage = document.getElementById('error-message');
+
+            loginForm.addEventListener('submit', function (event) {
+                if (passwordField.value.length < 8) {
+                    event.preventDefault();
+                    errorMessage.style.display = 'block';
+                } else {
+                    errorMessage.style.display = 'none';
+                }
+            });
+
+            // Search functionality
+            var searchButton = document.getElementById('search-btn');
+            var searchInput = document.getElementById('search-input');
+
+            searchButton.addEventListener('click', function () {
+                var query = searchInput.value.trim();
+                if (query) {
+                    // Perform the search action (e.g., redirect to a search results page)
+                    alert('Searching for: ' + query);
+                    // window.location.href = '/search?query=' + encodeURIComponent(query);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": ".vscode"
+		},
+		{
+			"path": "image"
+		},
+		{
+			"path": "my-project"
+		},
+		{
+			"path": "node.js"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": ".vscode"
+	}
+}
